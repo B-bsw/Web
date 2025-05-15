@@ -1,5 +1,7 @@
 window.onload = function() {
   // window.location.href = '../index.html';
+
+    // refresh
     if (performance.navigation.type == 1) {
       window.location.replace('../index.html');
     }
@@ -19,23 +21,16 @@ window.onload = function() {
   const tch = document.getElementById("tch");
   const cld = document.getElementById("cld");
   const num_bd = document.getElementById("date");
+  const img_mys = document.getElementById('img_mys')
   
   setTimeout(function () {
-  for (let index = 0; index < 101; index++) {
-    setTimeout(function () {
-      title.style.opacity = index / 100;
-    }, index * 10);
-  }
+    show('title')
   }, 1500);
   
   setTimeout(function () {
   var ind = 1;
   
-  for (let index = 0; index < 101; index++) {
-    setTimeout(function () {
-      sub.style.opacity = index / 100;
-    }, index * 10);
-  }
+  show('subtitle')
   setTimeout(function () {
     for (let index = 0; index < 101; index++) {
       setTimeout(function () {
@@ -57,19 +52,42 @@ window.onload = function() {
     }
     setTimeout(function () {
       image.addEventListener("click", function () {
-          console.log("test")
         if (ind > 10) {
           ind = 1; 
         }
         image.setAttribute("src", "./Image/wan" + ind + ".jpg");
         ind++;
       });
-      for (let index = 0; index < 101; index++) {
-        setTimeout(function () {
-          tch.style.opacity = index / 100;
-        }, index * 10);
-      }
+      show('tch')
+      mys_box();
+      img_mys.addEventListener("click",function() {
+        window.location.href = './subpage/subpage.html';
+      });
     }, 800);
+
   }, 1000);
   }, 2000);
+
+  function mys_box() {
+    const targetElement = document.querySelector('#mys');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          show('mys');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.6
+    });
+    observer.observe(targetElement);
+  }
+
+  function show(id) {
+      for (let index = 0; index < 101; index++) {
+        setTimeout(function () {
+          document.getElementById(id).style.opacity = index/100
+        }, index * 10);
+      }
+  }
 }

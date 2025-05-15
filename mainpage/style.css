@@ -36,6 +36,10 @@
     display: none; /* ซ่อนเริ่มต้น */
     z-index: 1;
 }
+.scroll{
+    opacity: 0;
+}
+
 #cld_pop{
     border-radius: 10px;
     display: none;
